@@ -1,5 +1,5 @@
 <?php
-$title = 'aspName';
+$title = 'namePage';
 
 ?>
 
@@ -7,8 +7,8 @@ $title = 'aspName';
     <div class="container-fluid bg-dark text-light" style="height: 100vh" id="home">
         <div class="row">
             <a href="../" class="text-light">
-                <p class="npoudelp display-3 text-center">n p o u d e l p</p>
-                <p class="tagLine text-center">6eb46438c9c34e724a166cb10dc138a803564cd1</p>
+                <p class="npoudelp display-3 text-center">aspChat</p>
+                <p class="tagLine text-center"> 87123c8a0d5644252f7436708ea2bd02d4365514</p>
             </a>
         </div>
         <div class="container">
@@ -30,7 +30,7 @@ $title = 'aspName';
     <script>
         checkName = (name) => {
             $.ajax({
-                url: './checkUserName.inc.php?name=' + name,
+                url: './include/checkUserName.inc.php?name=' + name,
                 method: 'POST',
                 success: (data) => {
                     if (data == '1') {
