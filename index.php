@@ -6,7 +6,7 @@ include_once("./include/header.inc.php");
 include_once("./include/deleteOldName.inc.php");
 include_once("./include/deleteOldMessage.inc.php");
 
-if (!isset($_COOKIE['anonName'])) {
+if ((!isset($_COOKIE['anonName'])) || ($_COOKIE['anonName'] == '')) {
     include_once("./pages/chooseName.php");
 } else {
 ?>
@@ -21,7 +21,8 @@ if (!isset($_COOKIE['anonName'])) {
             </div>
             <div class="row border-bottom border-3" id="container" style="overflow-y: scroll; height: 70%;">
                 <div class="col">
-                    <div class="container" id="messageBox">
+                    <div class="container justify-content-end" id="messageBox">
+                        <!-- messages will appear here -->
 
                     </div>
                 </div>
@@ -31,12 +32,17 @@ if (!isset($_COOKIE['anonName'])) {
                     <br>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
-                            <button type="button" class="btn" onclick="checkScroll()" id="scroll"><i class="bi bi-arrow-bar-down"></i></button>
+                            <span class="firstSpan">
+                                <button type="button" class="btn" onclick="checkScroll()" id="scroll"><i class="bi bi-arrow-bar-down"></i></button>
+                                <span class="secondSpan bg-dark text-light lead">Enable or disable autoscroll</span></span>
                         </div>
                         <input type="hidden" id="name" name="name" value="<?php echo $_COOKIE['anonName']; ?>">
                         <textarea autofocus class="form-control" id="message" rows="3"></textarea>
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-outline-light" onclick="send()" id="send"><i class="bi bi-send h3"></i></button>
+                            <span class="firstSpan">
+                                <button type="submit" class="btn btn-outline-light" onclick="send()" id="send"><i class="bi bi-send h3"></i></button>
+                                <span class="secondSpan bg-dark text-light lead">Send</span>
+                            </span>
                         </div>
                     </div>
                 </div>
