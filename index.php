@@ -27,17 +27,17 @@ if ((!isset($_COOKIE['anonName'])) || ($_COOKIE['anonName'] == '')) {
                     </div>
                 </div>
             </div>
-            <div class="row" style="overflow-y: scroll;">
+            <div class="row" style="overflow-y: hidden;">
                 <div class="col">
                     <br>
                     <div class="input-group mb-3">
-                        <div class="input-group-append">
+                        <!-- <div class="input-group-append">
                             <span class="firstSpan">
                                 <button type="button" class="btn" onclick="checkScroll()" id="scroll"><i class="bi bi-arrow-bar-down"></i></button>
                                 <span class="secondSpan bg-dark text-light lead">Enable or disable autoscroll</span></span>
-                        </div>
+                        </div> -->
                         <input type="hidden" id="name" name="name" value="<?php echo $_COOKIE['anonName']; ?>">
-                        <textarea autofocus class="form-control" id="message" rows="3"></textarea>
+                        <textarea autofocus class="form-control" id="message" rows="3" onclick="allowScroll()"></textarea>
                         <div class="input-group-append">
                             <span class="firstSpan">
                                 <button type="submit" class="btn btn-outline-light" onclick="send()" id="send"><i class="bi bi-send h3"></i></button>
@@ -90,16 +90,41 @@ if ((!isset($_COOKIE['anonName'])) || ($_COOKIE['anonName'] == '')) {
                     }
                 });
 
-                checkScroll = () => {
-                    if (autoScroll == true) {
-                        $("#scroll").css('background-color', 'red');
-                        autoScroll = false;
-                    } else {
-                        $("#scroll").css('background-color', 'green');
-                        autoScroll = true;
-                    }
-                    console.log(autoScroll);
+                // checkScroll = () => {
+                //     if (autoScroll == true) {
+                //         $("#scroll").css('background-color', 'red');
+                //         autoScroll = false;
+                //     } else {
+                //         $("#scroll").css('background-color', 'green');
+                //         autoScroll = true;
+                //     }
+                //     console.log(autoScroll);
+                // }
+
+                allowScroll = () => {
+                    autoScroll = true;
                 }
+
+                var lastScrollTop = 0;
+                var upCount = 0;
+                var downCount = 0;
+                $("#container").scroll(function(event) {
+                    var st = $(this).scrollTop();
+                    if (st > lastScrollTop) {
+                        downCount++;
+                        // console.log("down: " + downCount);
+                        if (downCount >= upCount) {
+                            //autoScroll = true;
+                        }
+                    } else {
+                        upCount++;
+                        if (upCount > 5) {
+                            autoScroll = false;
+                        }
+                        // console.log("up: " + upCount);
+                    }
+                    lastScrollTop = st;
+                });
             })
         </script>
     </body>
