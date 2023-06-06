@@ -23,6 +23,9 @@ $title = 'namePage';
                         <p id="display" class="lead">&nbsp;</p>
                     </form>
                 </div>
+                <p class="text-center lead px-5">
+                    Your username will expire in 24 hours and messages will be auto deleted within one hour. 
+                </p>
             </div>
         </div>
     </div>
