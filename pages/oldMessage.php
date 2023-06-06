@@ -5,6 +5,7 @@ include_once('../include/header.inc.php');
 
 if (isset($_REQUEST['q'])) {
     $limit = $_REQUEST['q'];
+    $limit = $limit + 1;
     $sql = 'SELECT * FROM chats WHERE mid < ' . $limit . ';';
     $res = mysqli_query($conn, $sql);
 }
@@ -47,7 +48,9 @@ if ((!isset($_COOKIE['anonName'])) || ($_COOKIE['anonName'] == '')) {
                             <div class="p-1" style="margin-bottom:10px"><span class="rounded ' . $color . ' p-1" style="float: ' . $align . '; max-width:70%">' . $chat['message'] . '</span></div>';
                         }
                         ?>
-
+                        <a href='../'>
+                            <span class='btn btn-outline-light'>See new message</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -55,9 +58,6 @@ if ((!isset($_COOKIE['anonName'])) || ($_COOKIE['anonName'] == '')) {
                 <div class="col">
                     <br>
                     <div class="input-group mb-3">
-                        <div class="input-group-append">
-                            <button type="button" class="btn" onclick="checkScroll()" id="scroll"><i class="bi bi-arrow-bar-down"></i></button>
-                        </div>
                         <input type="hidden" id="name" name="name" value="<?php echo $_COOKIE['anonName']; ?>">
                         <textarea autofocus class="form-control" id="message" rows="3"></textarea>
                         <div class="input-group-append">
@@ -70,6 +70,9 @@ if ((!isset($_COOKIE['anonName'])) || ($_COOKIE['anonName'] == '')) {
 
         <script type="text/javascript">
             $(document).ready(function() {
+                var element = document.getElementById('container');
+                element.scrollTop = element.scrollHeight;
+
                 var autoScroll = true;
                 $('#scroll').css('background-color', 'green');
                 send = () => {
@@ -95,16 +98,6 @@ if ((!isset($_COOKIE['anonName'])) || ($_COOKIE['anonName'] == '')) {
                     }
                 });
 
-                checkScroll = () => {
-                    if (autoScroll == true) {
-                        $("#scroll").css('background-color', 'red');
-                        autoScroll = false;
-                    } else {
-                        $("#scroll").css('background-color', 'green');
-                        autoScroll = true;
-                    }
-                    console.log(autoScroll);
-                }
             })
         </script>
     </body>
